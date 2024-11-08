@@ -48,12 +48,6 @@ kubectl get secret rabbit-mq-cluster-default-user -o jsonpath='{.data.password}'
 kubectl port-forward svc/rabbit-mq-cluster 5672
 ```
 
-6. Check environment variables of the pod
-
-```bash
-kubectl exec rabbit-mq-cluster-server-0 -- printenv
-```
-
 ## Build and deploy the app in Kubernetes
 
 1. Build the image of the server
