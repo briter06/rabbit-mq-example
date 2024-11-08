@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "1. Download the docker image:",
   "main": "index.js",
-  "scripts": {
-    "producer": "node src/producer.js",
-    "consumer": "node src/consumer.js"
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "dependencies": {
