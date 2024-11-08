@@ -1,5 +1,10 @@
+require('dotenv').config()
+
+const username = process.env.RABBITMQ_USERNAME
+const password = process.env.RABBITMQ_PASSWORD
+
 const amqp = require("amqplib/callback_api");
-amqp.connect("amqp://localhost", function (error0, connection) {
+amqp.connect(`amqp://${username}:${password}@localhost`, function (error0, connection) {
   if (error0) {
     throw error0;
   }
