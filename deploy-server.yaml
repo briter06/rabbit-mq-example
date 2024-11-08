@@ -1,0 +1,59 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbit-server
+  labels:
+    app: app-rabbit-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-rabbit-server
+  template:
+    metadata:
+      labels:
+        app: app-rabbit-server
+    spec:
+      containers:
+        - name: rabbit-server-container
+          image: rabbit-server:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          env:
+            - name: RABBITMQ_USERNAME
+              value: "default_user_ADiEXbEt8Kky7VLIrvY"
+            - name: RABBITMQ_PASSWORD
+              value: "yeSXdMfAT7NJ7OF9s6cdo92gyUwromes"
+            - name: RABBITMQ_SERVICE
+              value: "rabbit-mq-cluster"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+  labels:
+    app: app-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-consumer
+  template:
+    metadata:
+      labels:
+        app: app-consumer
+    spec:
+      containers:
+        - name: consumer-container
+          image: consumer:latest
+          imagePullPolicy: Never
+          env:
+            - name: RABBITMQ_USERNAME
+              value: "<username>"
+            - name: RABBITMQ_PASSWORD
+              value: "<password>"
+            - name: RABBITMQ_SERVICE
+              value: "rabbit-mq-cluster"
