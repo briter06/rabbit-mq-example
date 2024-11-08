@@ -59,7 +59,7 @@ docker build -t rabbit-server:latest -f Dockerfile.server .
 2. Build the image of the consumer
 
 ```bash
-docker build -t rabbit-consumer:latest -f Dockerfile.consumer .
+docker build -t consumer:latest -f Dockerfile.consumer .
 ```
 
 3. Deploy the images (**Note**: Replace the environment variables with your credentials)
