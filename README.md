@@ -62,7 +62,7 @@ docker build -t rabbit-server:latest -f Dockerfile.server .
 docker build -t rabbit-server:latest -f Dockerfile.consumer .
 ```
 
-3. Deploy the images
+3. Deploy the images (**Note**: Replace the environment variables with your credentials)
 
 ```bash
 kubectl apply -f deploy.yaml
