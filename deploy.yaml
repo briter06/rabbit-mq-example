@@ -4,6 +4,7 @@ metadata:
   name: rabbit-server
 spec:
   replicas: 1
+  template:
     spec:
       containers:
         - name: rabbit-server-container
@@ -26,6 +27,7 @@ metadata:
   name: consumer
 spec:
   replicas: 1
+  template:
     spec:
       containers:
         - name: consumer-container
