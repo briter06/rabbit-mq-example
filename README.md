@@ -30,19 +30,7 @@ kubectl apply -f "https://github.com/rabbitmq/cluster-operator/releases/latest/d
 kubectl apply -f rabbit-mq-cluster.yaml
 ```
 
-3. Get username
-
-```bash
-kubectl get secret rabbit-mq-cluster-default-user -o jsonpath='{.data.username}' | base64 --decode
-```
-
-4. Get the password
-
-```bash
-kubectl get secret rabbit-mq-cluster-default-user -o jsonpath='{.data.password}' | base64 --decode
-```
-
-5. Port-forward to the service
+3. Port-forward to the service
 
 ```bash
 kubectl port-forward svc/rabbit-mq-cluster 5672
@@ -62,25 +50,37 @@ docker build -t rabbit-server:latest -f Dockerfile.server .
 docker build -t consumer:latest -f Dockerfile.consumer .
 ```
 
-3. Deploy the images (**Note**: Replace the environment variables with your credentials)
+3. Get username
+
+```bash
+kubectl get secret rabbit-mq-cluster-default-user -o jsonpath='{.data.username}' | base64 --decode
+```
+
+4. Get the password
+
+```bash
+kubectl get secret rabbit-mq-cluster-default-user -o jsonpath='{.data.password}' | base64 --decode
+```
+
+5. Deploy the images (**Note**: Replace the environment variables with your credentials)
 
 ```bash
 kubectl apply -f deploy.yaml
 ```
 
-4. Port forward to the server
+6. Port forward to the server
 
 ```bash
 kubectl port-forward pod/\${SERVER_POD_NAME} 3000:3000 
 ```
 
-5. Show the logs of the consumer
+7. Show the logs of the consumer
 
 ```bash
 kubectl logs -f pod/\${CONSUMER_POD_NAME}
 ```
 
-6. Send a request to the server
+8. Send a request to the server
 
 ```bash
 curl --location 'http://localhost:3000' \
@@ -90,4 +90,14 @@ curl --location 'http://localhost:3000' \
 }'
 ```
 
-7. You should see the message in the logs of the consumer pod
+9. You should see the message in the logs of the consumer pod
+
+## Use the monitoring dashboard for RabbitMQ
+
+1. Port forward to the port of the monitoring tool
+
+```bash
+kubectl port-forward svc/rabbit-mq-cluster 15672
+```
+
+2. You can access it through `http://localhost:15672`, using the same credentials
